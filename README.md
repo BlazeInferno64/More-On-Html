@@ -3,8 +3,15 @@ These Are Just Html Files Made By Me U can use it but plss give credit to us-
 
 # Note-
 ```
-This Repository Gets Updated Very Frequently So To Keep The Pace With The Latest One Make Sure To Pay A Visit To It Always
-If Not Possible To Visit Always. It Can Be Checked After Every Seven Days To Get Confirm If New Files Are Being Uploaded In It
+This Repository Gets Updated Very
+ Frequently So To Keep The Pace 
+With The Latest One Make Sure 
+To Pay A Visit To It Always
+If Not Possible To Visit Always. 
+It Can Be Checked After Every 
+Seven Days To Get Confirm If 
+New Files Are Being Uploaded 
+In It Or Not. 
 Thank You For Reading This-
 Have a Nice Day :)
 ```
