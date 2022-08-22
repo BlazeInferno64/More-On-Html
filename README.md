@@ -15,3 +15,11 @@ Our YouTube Channel Link Plss subscribe -
 BlazingInfernoDragon123 Channel
 ```
 </a>
+
+#Chrome Dino Game :)
+Want To Play The Chrome Dino Game? Just Click Below 
+<a href="chrome://dino">
+```
+Google Chrome Dino Game Click Here 
+```
+</a>
