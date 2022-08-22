@@ -5,7 +5,7 @@
 
 version: 2
 updates:
-  - package-ecosystem: ".github/dependabot.yml" # See documentation for possible values
-    directory: "https://github.com/blaizinginfernodragon123/More-On-Html/main/.github/dependabot.yml" # Location of package manifests
+  - package-ecosystem: "X" # See documentation for possible values
+    directory: "X" # Location of package manifests
     schedule:
       interval: "weekly"
