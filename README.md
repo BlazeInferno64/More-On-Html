@@ -31,7 +31,7 @@ BlazingInfernoDragon123 Channel
 ```
 </a>
 
-#Chrome Dino Game :)
+# Chrome Dino Game :)
 Want To Play The Chrome Dino Game? Just Copy And Paste It On Ur Browser's Address Bar-
 <a href="chrome://dino">
 ```
