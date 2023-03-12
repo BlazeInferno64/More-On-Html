@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APDCL online electricity bill viewer | BlaizingInfernoDragon123</title>
+    <link rel="stylesheet" href="./fontawesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+        ::selection{
+    color: #fff;
+    background-color: rgb(77, 248, 154);
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}    
+html{
+    scroll-behavior: smooth;
+}
+body{
+    font-family: system-ui, Verdana, Arial;
+    transition: 450ms ease-in-out;
+    text-align: center;
+    background: linear-gradient(90deg,rgb(13, 185, 113),50%,rgb(2, 203, 218));
+}
+a{
+    text-decoration: none;
+}
+        li{
+    list-style: none;
+}
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: black;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    transition: 0.3s ease;
+    opacity: 1;
+}
+.nav-links a{
+    color: #fff;
+}
+.logo{
+    font-size: 32px;
+}
+.menu{
+    display: inline-block;
+    gap: 1em;
+    font-size: 18px;
+}
+.menu li{
+    padding: 5px 14px;
+    display: inline-block;
+}
+.menu li:hover{
+    background-color: #2a2b2b;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+.support{
+    position: relative;
+}
+.dropdown{
+    background-color: #000;
+    padding: 1em 0;
+    position: absolute;
+    display: none;
+    border-radius: 8px;
+    top: 35px;
+}
+.dropdown li + li{
+    margin-top: 10px;
+}
+.dropdown li{
+    padding: 0.5em 1em;
+    width: 8em;
+    text-align: center;
+}
+.dropdown li:hover{
+    background-color: #2a2b2b;
+}
+.support:hover + .dropdown{
+    display: block;
+}
+input[type=checkbox]{
+    display: none;
+}
+.hamburger{
+    display: none;
+    font-size: 24px;
+    user-select: none;
+    cursor: pointer;
+    border: 2px solid #ccc;
+    padding: 2px 13px;
+    border-radius: 6px;
+    transition: 0.3s ease;
+}
+.hamburger:hover{
+    background-color: #2a2b2b;
+    transition: 0.3s ease;
+}
+.hamburger:active{
+    border: 2px solid #4c9e9e;
+    transition: 0.3s ease;
+}/*
+.iframe{
+    width: 100%;
+    border-bottom: .5px solid #2a2b2b;
+}*/
+.card{
+    border: 1px solid transparent;
+    padding: 40px 40px;
+    margin-top: -.5rem;
+}
+.link-btns{
+    padding: 1rem 2rem;
+    font-size: 19px;
+    outline: none;
+    color: #fff;
+    border-radius: .5em;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: 0.4s;
+    margin-top: .9rem;
+    position: static;
+    background: linear-gradient(90deg,rgb(248, 4, 98),30%,rgb(211, 64, 167));
+}
+.link-btns:hover{
+    transform: scale(0.9);
+    box-shadow: 0 12px 16px 0 rgba(243, 6, 164, 0.507),0 17px 50px 0 rgba(255, 1, 85, 0.404);
+    background: linear-gradient(90deg,rgb(211, 64, 167),30%,rgb(248, 4, 98));
+
+}
+.link-btns:active{
+    transform: scale(0.8);
+}
+.card h2{
+    color: #fff;
+    font-size: 26px;
+}
+.opt-btns{
+    padding: 30px 40px;
+}
+.footer{
+    background-color: #000;
+    color: #fff;
+    padding: 2rem 4rem;
+}
+.footer p{
+    font-size: 22px;
+}
+.footer a{
+    color: hsl(180, 89%, 38%);
+}
+.footer a:hover{
+    color: hsl(180, 35%, 36%);
+}
+.footer li a{
+    margin-top: .5rem;
+}
+.footer li{
+    text-align: left;
+    display: inline-flex;
+    padding: 5px 10px;
+    margin-bottom: .5rem;
+}
+.footer li a::before{
+    content: '\00bb';
+    color: hsl(180, 89%, 38%);
+}
+#img{
+    margin-bottom: 30px;
+}
+.maps{
+    padding: 30px 30px;
+}
+.img{
+    outline: none;
+    border-radius: 8px;
+    transition: 0.4s ease-in-out;
+}
+.img:hover{
+    background-color: #dedede;
+    box-shadow: 0 12px 16px 0 rgba(15, 15, 15, 0.507),0 17px 50px 0 rgba(28, 29, 28, 0.404);
+}
+.head{
+    color: #fff;
+    font-size: 23px;
+    margin-bottom: 2rem;
+}
+#date{
+    color: #fff;
+    font-size: 18px;
+    padding: 20px 30px;
+}
+.code{
+    padding: 10px 40px;
+    border: 1px solid transparent;
+    outline: none;
+    font-size: 18px;
+    border-radius: 10px;
+    transition: 0.4s ease-in-out;
+    margin-bottom: - 1rem;
+}
+.code:hover{
+    background-color: #dedede;
+    box-shadow: 0 12px 16px 0 rgba(15, 15, 15, 0.507),0 17px 50px 0 rgba(28, 29, 28, 0.404);
+}
+.code:active{
+    transform: scale(0.9);
+}
+#mssg{
+    color: rgb(248, 4, 98);
+}
+@media(min-width: 700px){
+   /* .iframe{
+        height: 350px;
+    }*/
+}
+@media(max-width: 768px){
+    .menu{
+        display: none;
+        position: absolute;
+        background-color: #000;
+        right: 0;
+        left: 0;
+        text-align: center;
+        padding: 16px 0;
+    }
+    .menu li:hover{
+        display: inline-block;
+        background-color: #2a2b2b;
+        transition: 0.3s ease;
+    }
+    .menu li + li{
+        margin-top: 12px;
+    }
+    input[type=checkbox]:checked ~ .menu{
+        display: block;
+    }
+    .hamburger{
+        display: block;
+    }
+    .dropdown{
+        left: 50%;
+        top: 30px;
+        transform: translateX(35%);
+    }
+    .dropdown li:hover{
+        background-color: #4c9e9e;
+    }
+    .iframe{
+        height: 350px;
+    }
+    .img{
+        width: 100%;
+        height: 50%;
+    }
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <h3>
+                <a style="color: white;" href="https://github.com/blaizinginfernodragon123">BlaizeInferno</a>
+
+                </h3>
+        </div>
+        <ul class="nav-links">
+            <input type="checkbox" id="checkbox_toggle" />
+            <label for="checkbox_toggle" class="hamburger">&#9776;</label>
+            <div class="menu">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-home"></i> Home
+                    </a>
+                </li>
+                <li>
+                    <a href="https://blaizinginfernodragon123.github.io/#about">
+                        <i class="fa fa-user"></i> About
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-paper-plane"></i> Blog
+                    </a>
+                </li>
+                <li>
+                    <a href="https://blaizinginfernodragon123.github.io/#contact">
+                        <i class="fa fa-comment"></i> Contact
+                    </a>
+                </li>
+                <li>
+                    <a href="https://blaizinginfernodragon123.github.io/#faqs">
+                        <i class="fa fa-question"></i> FAQs
+                    </a>
+                </li>
+                <ul class="dropdown">
+                    <li>
+                        <a href="#">
+                            My Github
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            My Codepen
+                        </a>
+                    </li>
+                </ul>
+                <li class="support">
+                    <a href="https://blaizinginfernodragon123.github.io/#contact">
+                        <i class="fa fa-support"></i> Support
+                    </a>
+                </li>
+            </div>
+        </ul>
+    </nav>
+    <!--
+    <div class="frame">
+        <iframe class="iframe" src="https://apdcl.org/website" loading="lazy|eager"></iframe>
+    </div>-->
+    <div class="card">
+        <h3 id="date">
+
+        </h3>
+        <h2>
+            APDCL.org/website, GMC website links are given below, use them as you like, also you can use the Homepage Button to browse through
+            their website
+        </h2>
+        <ul>
+            <div class="opt-btns">
+            <li>
+                <a href="https://apdcl.org/website/">
+                <button class="link-btns">
+                <i class="fa fa-home"></i> APDCL Homepage
+                </button>
+                </a>
+            </li>  
+            <li>
+                <a href="https://www.apdclrms.com/cbs/onlinecrm/knowYourSmartBalance">
+                <button class="link-btns">
+                    <i class="fa fa-credit-card"></i>  Smart Prepaid Balance
+                </button>
+                </a>
+            </li> 
+        </li>  
+        <li>
+            <a href="https://www.apdcl.org/website/RechargePrepaid">
+            <button class="link-btns">
+                <i class="fa fa-credit-card"></i>  Recharge Prepaid Meter
+            </button>
+            </a>
+        </li> 
+        <li>
+            <a href="https://www.apdcl.org/website/ViewBill">
+            <button class="link-btns">
+                <i class="fa fa-file"></i>  View Electricity Bill
+            </button>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.apdcl.org/website/PayBill">
+            <button class="link-btns">
+                <i class="fa fa-money"></i>  Pay Electricity Bill
+            </button>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.apdcl.org/website/ApplyNewConn">
+            <button class="link-btns">
+                <i class="fa fa-users"></i>  Apply For New Connection
+            </button>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.apdcl.org/website/ReprintVoucher">
+            <button class="link-btns">
+                <i class="fa fa-print"></i>  Reprint Prepaid Voucher
+            </button>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.apdcl.org/website/DuplicateReceipt">
+            <button class="link-btns">
+                <i class="fa fa-print"></i>  Print Duplicate Receipt
+            </button>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.apdcl.org/website/MobileUpdate">
+            <button class="link-btns">
+                <i class="fa fa-phone"></i>  Update Mobile Number (KYC)
+            </button>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.apdcl.org/website/KnowConsNo">
+            <button class="link-btns">
+                <i class="fa fa-question"></i>  Know 12-Digit Consumer Number
+            </button>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.apdcl.org/website/KnowConsNoPrepaid">
+            <button class="link-btns">
+                <i class="fa fa-question"></i>  Know Prepaid Consumer Number
+            </button>
+            </a>
+        </li>
+        <li>
+            <a href="https://gmcpropertytax.com/ptax/login">
+            <button class="link-btns">
+                <i class="fa fa-sign-in"></i>  GMC Property Tax Website
+            </button>
+            </a>
+        </li>
+        <li>
+            <a href="https://gmcpropertytax.com/ptax/Selfassesment">
+            <button class="link-btns">
+                <i class="fa fa-pencil"></i>  Generate Your Holding Number Here
+            </button>
+            </a>
+        </li>
+        <li>
+            <a href="https://github.con/blaizinginfernodragon123">
+            <button class="link-btns">
+                <i class="fa fa-github"></i> Blaizing Inferno
+                Dragon123
+            </button>
+            </a>
+        </li>
+        <li>
+            <a href="https://github.con/blaizinginfernodragon123/#contact">
+            <button class="link-btns">
+                <i class="fa fa-paper-plane"></i> Contact us
+            </button>
+            </a>
+        </li>
+            </div>
+        </ul>
+            <input type="text" class="code" id="code" value="&lt;a href='https://blaizinginfernodragon123.github.io'&gt;BlaizeInferno&lt/a&gt;" readonly/>
+            <div id="mssg"></div>
+            <button class="link-btns" id="btn" onclick="copy()"><i class="fa fa-clone"></i> Copy</button>
+    </div>
+    <div class="maps">
+        <div class="head">
+            <h3>
+                Google Maps Location
+            </h3>
+        </div>
+        <a href="https://www.google.com/maps/place/Bijuli+Bhawan/@26.1817376,91.7425595,16z/data=!4m5!3m4!1s0x375a5a2e54fe8ba7:0x54b2b60ddc045995!8m2!3d26.1813666!4d91.7464285">
+            <!--<img class="img" id="image" src="bijuli-bhawan-map.74d11dd6.png" onclick="app.asyncCall('window.reload', function(response){});" IDS="8530" style="cursor:pointer;background: linear-gradient(315deg, #20bf55 0%, #01baef 74%)"/>-->
+            <img class="img" id="image" src="https://www.apdcl.org/website/img/bijuli-bhawan-map.74d11dd6.png" onclick="app.asyncCall('window.reload', function(response){});" IDS="8530" style="cursor:pointer;background: linear-gradient(315deg, #20bf55 0%, #01baef 74%)"/>
+        </a>
+    </div>
+    <div class="footer">
+        <ul>
+            <li>
+                <a href="#">
+                    Back To Top
+                </a>
+            </li>
+            <li>
+                <a href="mailto:blzinginfernodragon123@gmail.com">
+                    Mail Us
+                </a>
+            </li>
+            <li>
+                <a href="mailto:feedback.apdcl@gmail.com">
+                    Mail APDCL
+                </a>
+            </li>
+            <li>
+                <a href="tel:1912 or 022-35296117 / 022-69132900">
+                    Call APDCL
+                </a>
+            </li>
+        </ul>
+        <footer>
+            <p>
+            Copyright &copy;2023-24 <a href="https://github.com/blaizinginfernodragon123"><i class="fa fa-github"></i>BlaizingInfernoDragon123</a>
+        </p>
+        </footer>
+    </div>
+    <script>
+        const date = document.getElementById('date')
+        date.innerText = Date();
+        function copy(){
+            const field = document.getElementById('code')
+            const mssg = document.getElementById('mssg')
+            const btn = document.getElementById('btn')
+
+            navigator.clipboard.writeText(field.value);
+            btn.innerText = 'Copied!!'
+            mssg.innerText = '*Successfully Copied Text From The Field*'
+        }
+    </script>
+</body>
+</html>
