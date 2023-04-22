@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#000">
     <title>Online Code editor directly in your browser</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css" integrity="sha512-SgaqKKxJDQ/tAUAAXzvxZz33rmn7leYDYfBP+YoMRSENhf3zJyx3SBASt/OfeQwBHA1nxMis7mM3EV/oYT6Fdw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css" integrity="sha512-SgaqKKxJDQ/tAUAAXzvxZz33rmn7leYDYfBP+YoMRSENhf3zJyx3SBASt/OfeQwBHA1nxMis7mM3EV/oYT6Fdw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />-->
     <!--<link rel="stylesheet" href="./ClodfareFont.css">-->
     <link rel="icon" href="https://avatars.githubusercontent.com/u/96913755?v=4" type="image/x-icon"/>
+    <script src="https://kit.fontawesome.com/f3220d5256.js" crossorigin="anonymous"></script>
     <style>
         ::selection{
             color: #fff;
@@ -165,17 +166,17 @@
 <body>
     <div class="container" id="myDiv">
         <div class="left">
-            <label><i class="fa fa-html5"></i>  Html:</label>
+            <label><i class="fa-brands fa-html5"></i>  Html:</label>
             <textarea name="Html" class="html" spellcheck="false" id="html-code" onkeyup="run()" placeholder="Write your Html code here..."></textarea>
 
-            <label><i class="fa fa-css3"></i>  Css:</label>
+            <label><i class="fa-brands fa-css3-alt"></i>  Css:</label>
             <textarea name="Html" class="css" spellcheck="false" id="css-code" onkeyup="run()" placeholder="Write your Css code here..."></textarea>
 
-            <label><i class="fa fa-js"></i>  JavaScript:</label>
+            <label><i class="fa-brands fa-square-js"></i>  JavaScript:</label>
             <textarea class="js" name="Html" spellcheck="false" id="js-code" onkeyup="run()" placeholder="Write your JavaScript code here..."></textarea>
         </div>
         <div class="right">
-            <label><i class="fa fa-play"></i>  Output:</label>
+            <label><i class="fa-solid fa-play"></i>  Output:</label>
             <iframe id="output" frameborder="0"></iframe>
         </div>
     </div>
