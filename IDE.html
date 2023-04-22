@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000">
+    <title>Online Code editor directly in your browser</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./ClodfareFont.css">
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/96913755?v=4" type="image/x-icon"/>
+    <style>
+        ::selection{
+            color: #fff;
+            background: rgb(4, 179, 112);
+        }
+        *{
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            background: linear-gradient(1000deg,rgb(1, 209, 88),50%,rgb(43, 177, 255));
+            color: #fff;
+            font-family: Verdana, Arial;
+            transition: 450ms ease-in-out;
+        }
+        .container{
+            width: fit-content;
+            height: 100vh;
+            padding: 10px 10px;
+            display: flex;
+        }
+        .left,.right{
+            flex-basis: 50%;
+            padding: 10px;
+        }
+        textarea{
+            width: 100%;
+            height: 29%;
+            background: #1f1f1f;
+            color: #fff;
+            padding: 13px 20px;
+            border: 0;
+            outline: 0;
+            font-size: 18px;
+            border-bottom-right-radius: 1rem;
+            border-bottom-left-radius: 1rem;
+            animation: pop 0.5s ease-in-out;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+        iframe{
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border: 0;
+            outline: 0;
+            border-bottom-right-radius: 1rem;
+            border-bottom-left-radius: 1rem;
+            animation: pop 0.5s ease-in-out;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+        @keyframes pop {
+            0%{
+                transform: scale(0);
+            }
+            100%{
+                transform: scale(1);
+            }
+        }
+        label i{
+            margin-right: 10px;
+            margin-left: 10px;
+            animation: pop 0.5s ease-in-out;
+        }
+        label{
+            padding: 12px 10px;
+            display: inline-flex;
+            align-items: center;
+            width: 100%;
+            background: #0009;
+            height: 10px;
+            margin-top: .8rem;
+            border-top-right-radius: .6rem;
+            border-top-left-radius: .6rem;
+            animation: pop 0.5s ease-in-out;
+        }
+        .fa-html5{
+            color: rgb(255, 80, 11);
+        }
+        .fa-css3{
+            color: rgb(11, 109, 255);
+        }
+        .fa-jsfiddle{
+            color: yellow;
+        }
+    .footer{
+    border: 2px dotted #000;
+    background-color: #000;
+    color: #fff;
+    animation: pop 0.5s ease-in-out;
+    border-radius: 1em;
+    width: 100%;
+    margin-top: 8rem;
+    padding: 2em 2em;
+    overflow: hidden;
+    padding-left: 1em;
+    transition: 0.4s ease-in-out;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+
+}
+.footer a{
+    text-decoration: none;
+    color: hsl(180, 100%, 29%);
+    transition: 0.4s ease-in-out;
+}
+.footer a:hover{
+    color: hsl(180, 100%, 19%);
+}
+.footer li{
+    padding: 5px 5px;
+    text-align: start;
+    list-style: none;
+}
+.footer li a::before{
+    content: '\00bb';
+}
+.footer h3{
+    text-align: center;
+}
+.border{
+    border-top: 1px solid hsl(180, 100%, 29%);
+    padding: 5px 0px;
+}
+.padd{
+    padding: 0 3rem;
+}
+        @media(max-width:500px){
+            .container{
+                display: block;
+            }
+            .left,.right{
+            flex-basis: 100%;
+            padding: 10px;
+            }
+            label{
+                margin-top: 1rem;
+            }
+            .padd{
+                padding: 0 1.7rem;
+            }
+            textarea{
+                height: 10rem;
+            }
+            .footer{
+                margin-top: 23rem;
+            }
+            iframe{
+                height: 15rem;
+            }
+    }
+    </style>
+</head>
+<body>
+    <div class="container" id="myDiv">
+        <div class="left">
+            <label><i class="fa fa-html5"></i>  Html:</label>
+            <textarea name="Html" class="html" spellcheck="false" id="html-code" onkeyup="run()" placeholder="Write your Html code here..."></textarea>
+
+            <label><i class="fa fa-css3"></i>  Css:</label>
+            <textarea name="Html" class="css" spellcheck="false" id="css-code" onkeyup="run()" placeholder="Write your Css code here..."></textarea>
+
+            <label><i class="fa fa-jsfiddle"></i>  JavaScript:</label>
+            <textarea class="js" name="Html" spellcheck="false" id="js-code" onkeyup="run()" placeholder="Write your JavaScript code here..."></textarea>
+        </div>
+        <div class="right">
+            <label><i class="fa fa-play"></i>  Output:</label>
+            <iframe id="output" frameborder="0"></iframe>
+        </div>
+    </div>
+    <footer>
+        <div class="padd">
+        <div class="footer">
+            <footer>
+                <div class="help">
+                    <h4>
+                        Some useful links - 
+                    </h4>
+                    <br>
+                    <ul class="li">
+                        <li>
+                            <a href="https://blaizinginfernodragon123.github.io/#contact" target="_blank" class="li">Facing a problem? Contact me here</a>
+                        </li>
+                         <li>
+                             <a href="https://github.com/blaizinginfernodragon123/More-On-Html/issues/new/choose" target="_blank" class="li">File an Issue here</a>
+                         </li>
+                        <li>
+                            <a href="mailto:blazinginfernodragon123@gmail.com" class="li" target="_blank">Mail me here</a>
+                        </li>
+                    </ul>
+                </div>
+                <br>
+                <div class="border">
+                <h3>
+                    Copyright &copy;2023-24 
+                    <a target="_blank" href="https://github.com/blaizinginfernodragon123">
+                        <i class="fa fa-github"></i>
+                        BlaizingInfernoDragon123
+                    </a>
+                </h3>
+                </div>
+            </footer>
+        </div>
+    </div>
+    </footer>
+    <script>
+        function run(){
+            let htmlCode = document.getElementById("html-code").value;
+            let jsCode = document.getElementById("js-code").value;
+            let cssCode = document.getElementById("css-code").value;
+            let output = document.getElementById("output");
+
+            output.contentDocument.body.innerHTML = htmlCode+"<style>"+cssCode+"</style>";
+            output.contentWindow.eval(jsCode);
+        }
+    </script>
+    
+</body>
+</html>
