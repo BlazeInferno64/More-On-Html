@@ -1,5 +1,6 @@
 # More-On-Html
-These Are Just Html Files Made By Me U can use it but plss give credit to us-
+ Learn more about Html through this repository 
+ |---|
 
 # Access all the uploaded files here -
 
