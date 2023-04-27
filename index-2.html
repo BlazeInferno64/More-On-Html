@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../ClodfareFont.css" />
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/96913755?v=4" type="image/x-icon"/>
+    <script src="https://kit.fontawesome.com/f3220d5256.js" crossorigin="anonymous"></script>
+    <title>Search New Uploaded Files</title>
+    <style>
+        ::selection{
+            color: #fff;
+            background: rgb(24, 224, 141);
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            transition: 450ms ease-in-out;
+            padding: 1rem 1.5rem 1.5rem 1rem;
+            background: linear-gradient(1000deg,rgb(1, 209, 88),50%,rgb(43, 177, 255)); 
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        a{
+            text-decoration: none;
+            color: initial;
+        }
+        li{
+            list-style: none;
+        }
+        .search-header{
+            /*margin-top: ;*/
+            border: 4px dashed #aaa;
+            padding: 2rem 2rem;
+            border-radius: .8rem;
+            text-align: center;
+            background: #fff;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+            animation: pop 0.5s ease-in-out;
+           /* box-shadow: 0 12px 16px 0 rgba(28, 29, 28, 0.17),0 17px 50px 0 rgba(46, 49, 48, 0.27);*/
+
+        }
+        .middle{
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: .5rem;
+            margin-right: 3rem;
+        }
+        .search{
+            width: 100%;
+            height: 100%;
+            padding: 1rem 4rem;
+            font-size: 1.2rem;
+            border-radius: .7rem;
+            border: 2px solid #aaa;
+            transition: 0.5s ease-in-out;
+            outline: none;
+            background-image: url(search.svg);
+            background-position: 10px 12px;
+            background-repeat: no-repeat;
+        }
+        .search1{
+            width: 100%;
+            padding: 1rem 4rem;
+            font-size: 1.2rem;
+            background-image: url(search.svg);
+            background-position: 10px 12px;
+            background-repeat: no-repeat;
+            border-radius: .7rem;
+            border: 2px solid rgb(236, 12, 68);
+            transition: 0.5s ease-in-out;
+            outline: none;
+            box-shadow: 0 12px 16px 0 rgba(223, 6, 53, 0.24),0 17px 50px 0 rgba(231, 11, 84, 0.19);
+        }
+        .search2{
+            width: 100%;
+            padding: 1rem 4rem;
+            font-size: 1.2rem;
+            border-radius: .7rem;
+            border: 2px solid #06cab0;
+            transition: 0.5s ease-in-out;
+            background-image: url(search.svg);
+            background-position: 10px 12px;
+            background-repeat: no-repeat;
+            outline: none;
+            box-shadow: 0 12px 16px 0 rgba(6, 223, 139, 0.24),0 17px 50px 0 rgba(11, 231, 176, 0.19);
+        }
+        .search:focus{
+            border: 2px solid #06cab0;
+            transition: 0.2s ease-in-out;
+            box-shadow: 0 12px 16px 0 rgba(6, 223, 139, 0.24),0 17px 50px 0 rgba(11, 231, 176, 0.19);
+        }
+        .files{
+            display: grid;
+           /* grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));*/
+            border: 3px dashed rgb(156, 154, 154);
+            padding: 1rem 2rem;
+            margin-top: 1.5rem;
+            background: #fff;
+            width: 345px;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+            height: fit-content;
+            display: inline-block;
+            margin-left: 1rem;
+            border-radius: .7rem;
+            animation: pop 0.5s ease-in-out;
+           /* box-shadow: 0 12px 16px 0 rgba(28, 29, 28, 0.17),0 17px 50px 0 rgba(46, 49, 48, 0.27);*/
+
+        }
+        .header{
+            border-bottom: 1px solid #000;
+            padding: 1rem 0;
+        }
+        .content{
+            margin-top: 1.5rem;
+        }
+        .info{
+            padding: 2rem 1rem 0;
+            margin-left: 1rem;
+        }
+        .visit-btn{
+            padding: .5rem 1.7rem;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            border: 2px solid rgb(17, 103, 231);
+            border-radius: 1rem;
+            color: rgb(4, 84, 204);
+            background-color: transparent;
+            cursor: pointer;
+            transition: 0.4s ease-in-out;
+            animation: pop 1s ease-in-out;
+        }
+        .visit-btn:hover{
+            background-color: rgb(215, 226, 241);
+            transition: 0.4s ease-in-out;
+            transform: scale(0.9);
+            box-shadow: 0 12px 16px 0px rgba(0,0,0,0.24),0 17px 50px 0px rgba(0,0,0,0.19);
+        }
+        .date{
+            margin-top: .5rem;
+        }
+        .hide{
+            display: none;
+        }
+   /*     .footer{
+    border: 2px dotted #000;
+    background-color: #000;
+    color: #fff;
+    border-radius: 1em;
+    width: 95%;
+    text-align: center;
+    margin-top: 1rem;
+    padding: 2em 2em;
+    overflow: hidden;
+    padding-left: 1em;
+    transition: 0.4s ease-in-out;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+
+}
+.footer a{
+    text-decoration: none;
+    color: hsl(180, 100%, 29%);
+    transition: 0.4s ease-in-out;
+}
+.footer a:hover{
+    color: hsl(180, 100%, 19%);
+}
+.footer li{
+    padding: 5px 5px;
+    text-align: start;
+}
+.footer li a::before{
+    content: '\00bb';
+}
+.border{
+    border-top: 1px solid hsl(180, 100%, 29%);
+    padding: 5px 0px;
+}*/
+#cards{
+    padding: 2rem;
+}
+.header h3{
+    color: #048a78;
+}
+.date{
+    color: #048a78;
+}
+.footer{
+    background: #000;
+    color: #fff;
+    padding: 2rem 2rem 2rem;
+    border: none;
+    width: 100%;
+    margin-top: 1.5rem;
+    margin-bottom: -2rem;
+    border-top-left-radius: .8rem;
+    border-top-right-radius: .8rem;
+    border-bottom-left-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+    transition: 0.4s ease-in-out;
+    animation: pop 0.5s ease-in-out;
+    box-shadow: 0 12px 16px 17px rgba(0,0,0,0.24),0 17px 50px 17px rgba(0,0,0,0.19);
+
+}
+.footer li{
+    padding: .3rem 0;
+}
+.footer a{
+    color:hsl(180, 100%, 29%);
+    transition: 0.2s ease-in-out;
+}
+.footer a:hover{
+    color:hsl(180, 100%, 19%);
+}
+.footer li a::before{
+    content: '\00bb';
+    padding-right: .4rem;
+}
+.border{
+    border-top: 1px solid hsl(180, 100%, 29%);
+    padding: 1rem 0rem;
+    text-align: center;
+}
+        #error{
+            font-size: 1.5rem;
+            animation: pop 0.5s ease-in-out;
+            text-align: center;
+            border: 4px dashed #ccc;
+            padding: 2rem 2rem;
+            margin-left: 1rem;
+            margin-top: 4rem;
+            display: none;
+            border-radius: .6rem;
+        }
+        @keyframes pop {
+            0%{
+                opacity: 1;
+                transform: scale(0);
+            }
+            100%{
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        @media (max-width: 500px) {
+            .files{
+                width: fit-content;
+            }
+            .middle{
+                padding: 1rem 1.5rem;
+                margin-right: 0rem;
+            }
+            .footer{
+                width: 100%;
+                margin-left: .5rem;
+                margin-right: 2rem;;
+            }
+            #cards{
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="search-header">
+        <div class="upper">
+            <h2>
+                Browse uploaded Files Here in this repository
+            </h2>
+        </div>
+        <div class="middle">
+            <input class="search" id="myInput" type="text" placeholder="Search Files..." onkeyup="search()" />
+        </div>
+    </div>
+    <div class="info" id="content">
+        <h2 id="info">
+            Files Uploaded -
+        </h2>
+    </div>
+    <div id="cards">
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                        Online Code Editor 
+                    </h3>
+                    <div class="date">
+                        Date added : 20/04/2023
+                    </div>
+                </div>
+                <div class="content">
+                    Access a smooth code editor directly from your browser for Html, Css and JavaScript. Everytime any change
+                    is made it will live reload and run your code.
+                    <br>
+                    <a href="./IDE.html" title="Online Code Editor">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                        Css Ripple Effect Button 
+                    </h3>
+                    <div class="date">
+                        Date added : 1/04/2023
+                    </div>
+                </div>
+                <div class="content">
+                    A smooth Css and JavaScript animation for a button. Material desgin like ripple effect animation 
+                    <br>
+                    <a href="./Ripple Effect Button.html" title="Ripple Effect Button">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                        Public Ip address checker 
+                    </h3>
+                    <div class="date">
+                        Date added : 24/03/2023
+                    </div>
+                </div>
+                <div class="content">
+                    A webpage which quickly checks your public
+                     IP address using jQuery along with JavaScript 
+                    <br>
+                    <a href="./ip.html" title="Public Ip address checker">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                        Realtime Video WebCam Streamer 
+                    </h3>
+                    <div class="date">
+                        Date added : 27/01/2023
+                    </div>
+                </div>
+                <div class="content">
+                    An application made using JavaScript which could stream your videos online without using any of the backend services
+                    <br>
+                    <a href="./Realtime Video WebCam.html" title="Stream your videos online for free">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                        Geolocation Tester 
+                    </h3>
+                    <div class="date">
+                        Date added : 24/12/2022
+                    </div>
+                </div>
+                <div class="content">
+                    Check your latitudes and longitudes using this Geolocation API. Made using JavaScript
+                    <br>
+                    <a href="./Ask For Geolocation.html" title="Geolocation API">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                        Battery Status Indicator 
+                    </h3>
+                    <div class="date">
+                        Date added : 27/01/2023
+                    </div>
+                </div>
+                <div class="content">
+                    Check your device battery status using this page. Made using JavaScript
+                    <br>
+                    <a href="./Battery Charge Indicator.html" title="Battery Tester API">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                        Custom Responsive Css Side Nav Bar 
+                    </h3>
+                    <div class="date">
+                        Date added : 20/11/2022
+                    </div>
+                </div>
+                <div class="content">
+                    A fully customizable css responsive side navigation bar. Use it anywhere,anytime for free
+                    <br>
+                    <a href="./Customs Side Navigation Bar.html" title="Css Side Nav Bar">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                        Css Code Snippets Highlighter 
+                    </h3>
+                    <div class="date">
+                        Date added : 10/11/2022
+                    </div>
+                </div>
+                <div class="content">
+                    A beautiful but simple css code highlighter which highlights any code written between these tags - &lt;code&gt; &&lt;/code&gt; 
+                    <br>
+                    <a href="./CSS code Block Display.html" title="Css Code Highlighter">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                       Smooth Manual Css SlideShow 
+                    </h3>
+                    <div class="date">
+                        Date added : 6/11/2022
+                    </div>
+                </div>
+                <div class="content">
+                    A smooth animated Css SlideShow. Use it to display any slides for your project directly in your browser 
+                    <br>
+                    <a href="./Manual Slide Show.html" title="Smooth Css SlideShow">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                       Toggle Animation Button 
+                    </h3>
+                    <div class="date">
+                        Date added : 1/11/2022
+                    </div>
+                </div>
+                <div class="content">
+                    A smooth Css animated toggle switch button. Use it anywhere,anytime for free
+                    <br>
+                    <a href="./Toggle Switch.html" title="Smooth Css Animated Toggle Switch Button">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                       Pressed Effect Button 
+                    </h3>
+                    <div class="date">
+                        Date added : 1/11/2022
+                    </div>
+                </div>
+                <div class="content">
+                    A pressed effect button made using pure Css. Use it anytime, anywhere for free
+                    <br>
+                    <a href="./Pressed Effect Button.html" title="Pressed Effect Button">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                       Length Converter 
+                    </h3>
+                    <div class="date">
+                        Date added : 27/10/2022
+                    </div>
+                </div>
+                <div class="content">
+                    A very reliable length converter which could be used for any purposes. Use it anytime,anywhere
+                    <br>
+                    <a href="./Length Converter.html" title="Convert your length for free">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                       Bookmark
+                    </h3>
+                    <div class="date">
+                        Date added : 25/10/2022
+                    </div>
+                </div>
+                <div class="content">
+                    A simple demonstration of a webpage which uses Bookmark. It is a very reliable way to browse through long articles, paragraphs,etc.
+                    <br>
+                    <a href="./Bookmark 📑.html" title="Bookmark Demo">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                       Button Inside Image
+                    </h3>
+                    <div class="date">
+                        Date added : 18/10/2022
+                    </div>
+                </div>
+                <div class="content">
+                    A simple demonstration of a webpage which uses Button inside the image container which could be used for various purposes
+                    <br>
+                    <a href="./Button On Image.html" title="Button Inside Image">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                       Animated Thank You Popup
+                    </h3>
+                    <div class="date">
+                        Date added : 15/10/2022
+                    </div>
+                </div>
+                <div class="content">
+                    A simple animated thank you popup demonstration using Html, Css and JavaScript
+                    <br>
+                    <a href="./Animated Thank You Pop Up.html" title="Animated Thank You Pop Up">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                       Custom Disbaled Looking Button
+                    </h3>
+                    <div class="date">
+                        Date added : 13/10/2022
+                    </div>
+                </div>
+                <div class="content">
+                    A custom disabled looking button made using Html and pure Css. Most of the modern websites use this feature a lot
+                    <br>
+                    <a href="./Disabled Looking Button.html" title="Disabled Look Button">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                       File Upload Button
+                    </h3>
+                    <div class="date">
+                        Date added : 10/10/2022
+                    </div>
+                </div>
+                <div class="content">
+                    A Simple Browser Built-in file upload button which is used to upload files
+                    <br>
+                    <a href="./Upload File Button.html" title="File Upload Button">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                       Custom Accordion
+                    </h3>
+                    <div class="date">
+                        Date added : 10/10/2022
+                    </div>
+                </div>
+                <div class="content">
+                    A Custom but simple Accordion menu demonstration, which is made using Html, Css & JavaScript
+                    <br>
+                    <a href="./According.html" title="Custom Accordion">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                       Vertical Group Of Buttons
+                    </h3>
+                    <div class="date">
+                        Date added : 8/10/2022
+                    </div>
+                </div>
+                <div class="content">
+                    A Vertical group of buttons made using pure Css
+                    <br>
+                    <a href="./Vertical Button Group.html" title="Vertical Groups Of Buttons">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                       Round Edged Button
+                    </h3>
+                    <div class="date">
+                        Date added : 6/10/2022
+                    </div>
+                </div>
+                <div class="content">
+                    A simple round Edged Button made using pure Css, Use it anytime,anywhere for free
+                    <br>
+                    <a href="./Rounded Edge Buttons.html" title="Simple Round Edged Button">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                      Shadow Hover Effect Button
+                    </h3>
+                    <div class="date">
+                        Date added : 4/10/2022
+                    </div>
+                </div>
+                <div class="content">
+                    A beautiful Shadow Hover Button Made using Pure Css
+                    <br>
+                    <a href="./Shadow Hover Button.html" title="Beautiful Shadow Hover Button">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                      Arrow Hover Effect Button
+                    </h3>
+                    <div class="date">
+                        Date added : 1/10/2022
+                    </div>
+                </div>
+                <div class="content">
+                    A simple arrow hover effect button made using pure Css. Use it anytime, anywhere for free
+                    <br>
+                    <a href="./Hover Button With Arrow.html" title="Custom Arrow Hover Button">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                      Fade Hover Effect Button
+                    </h3>
+                    <div class="date">
+                        Date added : 1/10/2022
+                    </div>
+                </div>
+                <div class="content">
+                    A nice fade hover button made using Html,Css & JavaScript
+                    <br>
+                    <a href="./Hover Button With Arrow.html" title="Fade Hover Effect Button">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                        Responsive Rows And Columns 
+                    </h3>
+                    <div class="date">
+                        Date added : 29/09/2023
+                    </div>
+                </div>
+                <div class="content">
+                    A nice responsive Rows And Columns Webpage.
+                    <br>
+                    <a href="./rows.html" title="Responsive Rows and Columns ">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                        Layout For A Simple Website 
+                    </h3>
+                    <div class="date">
+                        Date added : 27/09/2023
+                    </div>
+                </div>
+                <div class="content">
+                    A Simple Layout for a website. Use it anywhere, anytime for free
+                    <br>
+                    <a href="./Demo Website.html" title="Simple Layout For a Website ">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="files">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                      My Website a.k.a Homepage
+                    </h3>
+                    <div class="date">
+                        Last Updated : 1 hour ago
+                    </div>
+                </div>
+                <div class="content">
+                    Visit My Website For More Information About my repositories
+                    <br>
+                    <a href="https://blaizinginfernodragon123.github.io/" title="Checkout my Website for more Information :)">
+                    <button class="visit-btn">
+                        <i class="fa fa-send"></i>  Check out
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="error">
+        No results found :(
+    </div>
+    <br>
+    <div class="footer">
+        <footer>
+            <div class="help">
+                <h4>
+                    Some useful links - 
+                </h4>
+                <br>
+                <ul class="li">
+                    <li>
+                        <a href="https://blaizinginfernodragon123.github.io/#contact" class="li">Have an issue? Contact us here</a>
+                    </li>
+                    <li>
+                        <a href="mailto:blazinginfernodragon123@gmail.com" class="li">Mail me here</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/blaizinginfernodragon123/More-On-Html/issues/new/choose" class="li">File an issue here</a>
+                    </li>
+                </ul>
+            </div>
+            <br>
+            <div class="border">
+            <h3>
+                Copyright &copy;2023-24 
+                <a href="https://github.com/blaizinginfernodragon123">
+                    <i class="fa fa-github"></i>
+                    BlaizingInfernoDragon123
+                </a>
+            </h3>
+            </div>
+        </footer>
+    </div>
+    <script>
+        
+function search() {
+  /*var input, filter, ul, li, a, i, cards, error, info;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("cards");
+  a = div.getElementsByTagName("a");
+  cards = document.getElementsByClassName('files');
+  error = document.getElementById("error");
+  info = document.getElementById("info");
+  for (i = 0; i < cards.length; i++) {
+    txtValue = cards[i].textContent || cards[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      cards[i].style.display = "";
+      error.style.display = 'none'
+      info.innerText = "Best Matches -";
+      input.className = 'search2';
+      console.log(`Showing results for - ${input.value}`);
+    } else {
+      cards[i].style.display = "none";
+      error.style.display = 'block';
+      info.innerText = "Best Matches -";
+      input.className = 'search1';
+      console.error(`Cannot find results for - ${input.value}`);
+      //window.location.reload(true);
+    }
+    if(input.value ===''|input.value == null){
+        info.innerText = "Files Uploaded -";
+        input.className = 'search';
+    }
+  }*/
+  let input = document.getElementById("myInput").value;
+  let box = document.getElementById("myInput");
+  input = input.toLowerCase();
+  inp = input.toUpperCase();
+  let y = document.getElementsByClassName('header');
+  let x = document.getElementsByClassName('files');
+  let error = document.getElementById("error");
+  let files = document.getElementById('cards');
+  let info = document.getElementById('info');
+
+  for(i = 0; i < x.length; i++){
+    txtValue = y[i].textContent || x[i].innerText;
+    if(!y[i].innerHTML.toLowerCase().includes(input)){
+        x[i].style.display = 'none';
+        box.className = 'search2'
+        info.innerText = 'Best Matches -';
+        console.log(`Showing results for ${input}`);
+    }
+   /* if(txtValue.toUpperCase().indexOf(input) < -1){
+            error.style.display = 'block';
+  }*/
+    else if(!y[i].innerHTML.toUpperCase().includes(inp)){
+        x[i].style.display = 'none';
+        box.className = 'search2'
+        info.innerText = 'Best Matches -';
+        console.log(`Showing results for ${input}`);
+    }
+    else{
+        x[i].style.display = 'block';
+        //error.style.display = 'block';
+        box.className = 'search';
+        console.log(`Showing results for ${input}`);
+    }
+  }
+}
+
+    </script>
+</body>
+</html>
