@@ -8,10 +8,10 @@
 Click on the given link below for the files 👇
 `
 
-<a href="https://blaizinginfernodragon123.github.io/More-On-Html/">
+<a href="https://blazeinferno64.github.io/More-On-Html/">
 
 ```
-https://blaizinginfernodragon123.github.io/More-On-Html/
+https://blazeinferno64.github.io/More-On-Html/
 ```
 </a>
 
@@ -32,10 +32,10 @@ Have a Nice Day :)
 
 # (Latest Upload) Test my latest Online IDE code editor here -
 
-<a href="https://blaizinginfernodragon123.github.io/More-On-Html/IDE.html">
+<a href="https://blazeinferno64.github.io/More-On-Html/IDE.html">
 
 ```
-https://blaizinginfernodragon123.github.io/More-On-Html/IDE.html
+https://blazeinferno64.github.io/More-On-Html/IDE.html
 ```
 </a>
 
